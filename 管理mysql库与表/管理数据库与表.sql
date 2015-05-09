@@ -1,4 +1,4 @@
-#ÔÚNavicat ÃüÁîÐÐ,²»ÄÜÔËÐÐhelp ÏµÁÐÃüÁî¡£
+ï»¿#ÔÚNavicat ÃüÁîÐÐ,²»ÄÜÔËÐÐhelp ÏµÁÐÃüÁî¡£
 #¸öÐÔ»¯ÃüÁîÐÐÌáÊ¾·û(ÔÚNavicat ÃüÁîÐÐÖÐÎÞÐ§)
 mysql>prompt \u@\h \d \r:\m:\s>     
 
@@ -225,4 +225,71 @@ mysql> show index from hellojd.wp_users;
 | wp_users |          1 | user_login_key |            1 | user_login    | A         |           1 | NULL     | NULL   |      | BTREE      |         |               |
 | wp_users |          1 | user_nicename  |            1 | user_nicename | A         |           1 | NULL     | NULL   |      | BTREE      |         |               |
 +----------+------------+----------------+--------------+---------------+-----------+-------------+----------+--------+------+------------+---------+---------------+
+3 rows in set
+
+
+12.#´´½¨±í(help create table)
+mysql> create table tuser(id varchar(32) not null default '0',name varchar(64));
+Query OK, 0 rows affected
+mysql> desc tus
+er;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | varchar(32) | NO   |     | 0       |       |
+| name  | varchar(64) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set
+
+#13.ÐÞ¸Ä±í(help alter table)
+mysql> alter table  tuser add column age int after id;
+Query OK, 0 rows affected
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> desc tuser;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| id    | varchar(32) | NO   |     | 0       |       |
+| age   | int(11)     | YES  |     | NULL    |       |
+| name  | varchar(64) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set
+
+#14.×Ö·û³¤¶È£¬·Ç×Ö½Ú³¤¶È
+mysql> create table t(n varchar(5));
+Query OK, 0 rows affected
+
+
+mysql> insert into t values('123456');
+1406 - Data too long for column 'n' at row 1
+mysql> insert into t values('12345');
+Query OK, 1 row affected
+
+mysql> insert into t values('ÎÒ°®Ìì°²ÃÅ');
+Query OK, 1 row affected
+
+mysql> select * from t;
++------------+
+| n          |
++------------+
+| 12345      |
+| ÎÒ°®Ìì°²ÃÅ |
++------------+
+2 rows in set
+
+#15.É¾³ý±í&ÖØÃüÃû±í
+mysql> drop table t;
+Query OK, 0 rows affected
+
+mysql> rename table t2 to t22;
+Query OK, 0 rows affected
+
+mysql> show tables;
++---------------------+
+| Tables_in_exampledb |
++---------------------+
+| t22                 |
+| tuser               |
+| u                   |
++---------------------+
 3 rows in set
